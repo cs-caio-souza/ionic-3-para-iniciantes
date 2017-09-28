@@ -1,3 +1,4 @@
+import { PedidoPageModule } from './../pages/pedido/pedido.module';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -17,6 +18,8 @@ import { SuccessPageModule } from "../pages/success/success.module";
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+
+import { CurrencyMaskModule } from "ng2-currency-mask";
 // import { environment } from '../environments/environment';
 //import firebase from 'firebase';
 
@@ -41,10 +44,12 @@ const firebaseConfig = {
     IntroPageModule,
     DrinkPageModule,
     NfcPageModule,
+    PedidoPageModule,
     SuccessPageModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    CurrencyMaskModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

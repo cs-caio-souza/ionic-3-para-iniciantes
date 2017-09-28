@@ -1,8 +1,9 @@
+import { PedidoPage } from './../pedido/pedido';
 import { Firedata } from './../../providers/firedata';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { NfcPage } from "../nfc/nfc";
-
+import { CurrencyPipe } from '@angular/common';
 @IonicPage()
 @Component({
   selector: 'page-drink',
@@ -16,7 +17,7 @@ export class DrinkPage {
   public pos_bebidas
   public pos_bebidas_array
   public item = {} 
-
+  public controle = []
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public db: Firedata
@@ -42,15 +43,16 @@ export class DrinkPage {
    //               console.log(i)
    //               return i}
    //             );
-  var controle = []
+ 
                let items= this.pos_bebidas.map(i=>{
-                 console.log(i)
-                 controle.push(i)
+                // console.log(i)
+                 this.controle.push(i)
                  return i});
                items
                  .forEach(i=>i
                        .forEach(e=>(
-                         console.log(controle)
+                  //       console.log(controle)
+                  console.log(e)
                  
                                )
                        ) 
@@ -64,22 +66,23 @@ export class DrinkPage {
     
    }
    saveItem(item) {
-    console.log(item);
+    //console.log(item);
    // console.log(controle)
-
+    const numero = Math.floor(Math.random() * 10)
     const promise =  this.fila_drinks.push({
-        tagid: item.itemName,
-        bebida1: item.itemDescription,
-        bebida2: item.itemDescription,
-        bebida3: item.itemDescription,
-        valor: Number(item.itemNumber),
+        ID: "04:57:5C:9A:78:3F:8"+numero,
+        RECEITA: "2," + (numero-2) +"," +(numero),
+        DRINK: item.title,
+        VALOR: Number(item.valor),
         timestamp: Date.now()
     });
     promise
-        .then(_ =>{
-              
-          })
-        .then(_ => {
+        .then(
+            () =>{
+           console.log(this.controle ) 
+          }
+        )
+        .then(() => {
             console.log('Added Item');
             this.item = {} ;
            // this.navCtrl.pop();
@@ -89,7 +92,10 @@ export class DrinkPage {
 
 
   }
-  goToNfcPage() {
-    this.navCtrl.push(NfcPage);
+  goToNfcPage(escolha) {
+   // console.log(escolha)
+
+    this.saveItem(escolha)
+    //this.navCtrl.push(PedidoPage);
   }
 }

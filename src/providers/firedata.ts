@@ -22,7 +22,7 @@ export class Firedata {
     return this._af.list('https://barionic-bd6fd.firebaseio.com/fila')
   }
   public posBebidas(): FirebaseListObservable<any[]>{
-    return this._af.list('https://barionic-bd6fd.firebaseio.com/Bebidas')
+    return this._af.list('https://barionic-bd6fd.firebaseio.com/bebidas')
 
 
 
